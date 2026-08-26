@@ -7,6 +7,11 @@ layout: default
     <h1 class="page-title">{{ page.emoji }} {{ page.title }}</h1>
     <button class="btn btn-ghost" id="fullscreen-toggle" type="button">⛶ Fullscreen</button>
   </header>
+  {% if page.strand %}
+  <div class="curriculum-badge" title="Informal alignment guide, not an official ACARA document">
+    🇦🇺 AC v9.0 · {{ page.strand }} · Years {{ page.years }}
+  </div>
+  {% endif %}
   <main class="activity-main">
     {{ content }}
   </main>

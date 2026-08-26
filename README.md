@@ -18,9 +18,35 @@ automatically to GitHub Pages via GitHub Actions.
 - **Ten Frames** — shows a number on one or two ten-frames up to 20.
 - **Number Generator** — random number picker with a custom range, including
   a "no repeats until the bag is empty" mode for fair student picks.
+- **Esti-Mystery** — reveals number clues (range, parity, factors, digit sum)
+  one at a time so students narrow down a hidden mystery number.
+- **Would You Rather Maths** — two scenarios (value for money, time & speed,
+  chance, area & volume), no single right answer, chosen and justified with
+  maths.
 
 Every activity page has a fullscreen button and keyboard shortcuts (shown at
 the bottom of each page) so it's easy to drive from the front of the room.
+
+## Australian Curriculum alignment
+
+Each activity page shows a badge (e.g. "AC v9.0 · Number · Years 3–6") noting
+its rough strand and year-band fit under the Australian Curriculum v9.0
+Mathematics strands (Number, Algebra, Measurement, Space, Statistics,
+Probability). This is an informal alignment guide for quick lesson planning,
+**not** an official ACARA content-description mapping — always check the
+actual content descriptions on [australiancurriculum.edu.au](https://www.australiancurriculum.edu.au/)
+if you need one for programming/reporting.
+
+| Activity | Strand(s) | Years |
+|---|---|---|
+| Number Talks | Number | 3–6 |
+| Esti-Mystery | Number (estimation & reasoning) | 2–6 |
+| Would You Rather Maths | Number, Measurement, Probability (reasoning) | 3–6 |
+| Subitising | Number | F–4 |
+| Which One Doesn't Belong? | Number, Space (reasoning) | F–6 |
+| Virtual Dice | Number, Probability | 1–6 |
+| Ten Frames | Number | F–2 |
+| Number Generator | Number | F–6 |
 
 ## Local development
 
@@ -43,5 +69,6 @@ deploy from GitHub Actions (Settings → Pages → Source).
 ## Adding more activities
 
 Add a new page under `activities/` with `layout: activity` front matter
-(`title`, `emoji`, `script`), a matching `assets/js/<name>.js` file, and a
-card on `index.html`.
+(`title`, `emoji`, `script`, and optionally `strand`/`years` for the
+curriculum badge), a matching `assets/js/<name>.js` file, and a card on
+`index.html`.

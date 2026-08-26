@@ -1,0 +1,96 @@
+---
+layout: activity
+title: Would You Rather Maths
+emoji: 🤔
+script: would-you-rather.js
+blurb: Two options, no single right answer — choose a path and justify it with maths.
+strand: "Number, Measurement, Probability · Reasoning"
+years: "3–6"
+---
+<div class="controls-bar">
+  <label class="field">
+    Category
+    <select id="wyr-category">
+      <option value="value">Value for Money</option>
+      <option value="number">Number Size</option>
+      <option value="time">Time &amp; Speed</option>
+      <option value="chance">Chance</option>
+      <option value="measurement">Area &amp; Volume</option>
+    </select>
+  </label>
+  <label class="field">
+    Level
+    <select id="wyr-level">
+      <option value="early">Early</option>
+      <option value="middle" selected>Middle</option>
+      <option value="upper">Upper</option>
+    </select>
+  </label>
+  <button class="btn btn-primary" id="wyr-new" type="button">🔀 New Scenario</button>
+</div>
+
+<div class="stage" id="wyr-stage">
+  <div class="wyr-grid" id="wyr-grid">
+    <div class="wyr-option" id="wyr-a">
+      <div class="wyr-label">A</div>
+      <div class="wyr-text" id="wyr-a-text">Click "New Scenario" to start</div>
+    </div>
+    <div class="wyr-or">or</div>
+    <div class="wyr-option" id="wyr-b">
+      <div class="wyr-label">B</div>
+      <div class="wyr-text" id="wyr-b-text"></div>
+    </div>
+  </div>
+</div>
+
+<p class="hint">Would you rather A or B? There's no single correct answer — justify your choice with maths. &nbsp;·&nbsp; <kbd>Space</kbd> new scenario</p>
+
+<style>
+.wyr-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
+  gap: 1.5rem;
+  width: 100%;
+}
+.wyr-option {
+  background: var(--panel-2);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 260px;
+}
+.wyr-label {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--accent);
+  background: rgba(255,204,51,0.12);
+  border-radius: 999px;
+  width: 2.4em;
+  height: 2.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wyr-text {
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.3;
+}
+.wyr-or {
+  align-self: center;
+  color: var(--text-dim);
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+@media (max-width: 700px) {
+  .wyr-grid { grid-template-columns: 1fr; }
+}
+</style>
