@@ -1,0 +1,46 @@
+---
+layout: activity
+title: Number Talks
+emoji: 💬
+script: number-talks.js
+blurb: Strings of related mental-maths problems for classroom number talks.
+---
+<div class="controls-bar">
+  <label class="field">
+    Category
+    <select id="nt-category">
+      <option value="addition">Addition</option>
+      <option value="subtraction">Subtraction</option>
+      <option value="multiplication">Multiplication</option>
+      <option value="division">Division</option>
+      <option value="doubling">Doubling &amp; Halving</option>
+      <option value="place-value">Place Value / Landmark Numbers</option>
+    </select>
+  </label>
+  <label class="field">
+    Level
+    <select id="nt-level">
+      <option value="early">Early</option>
+      <option value="middle" selected>Middle</option>
+      <option value="upper">Upper</option>
+    </select>
+  </label>
+  <button class="btn btn-primary" id="nt-new" type="button">🔀 New String</button>
+</div>
+
+<div class="stage" id="nt-stage">
+  <div>
+    <div class="badge" id="nt-badge">Addition · Middle</div>
+    <div class="big-number" id="nt-problem">Click "New String" to start</div>
+    <div class="big-text faint" id="nt-answer" style="min-height:1.2em;"></div>
+  </div>
+</div>
+
+<div class="progress-dots" id="nt-progress"></div>
+
+<div class="btn-group">
+  <button class="btn btn-big" id="nt-reveal" type="button">👁 Reveal Answer</button>
+  <button class="btn btn-big btn-primary" id="nt-next" type="button">Next Problem →</button>
+</div>
+
+<p class="hint"><kbd>Space</kbd> next problem &nbsp;·&nbsp; <kbd>A</kbd> reveal answer &nbsp;·&nbsp; <kbd>N</kbd> new string</p>

@@ -1,0 +1,34 @@
+---
+layout: activity
+title: Number Generator
+emoji: 🎯
+script: number-generator.js
+blurb: A random number picker with a custom range for quick problems or fair picks.
+---
+<div class="controls-bar">
+  <label class="field">
+    Min
+    <input type="number" id="ng-min" value="1" style="width:6em;">
+  </label>
+  <label class="field">
+    Max
+    <input type="number" id="ng-max" value="20" style="width:6em;">
+  </label>
+  <label class="checkbox-field">
+    <input type="checkbox" id="ng-no-repeat"> No repeats until every number is used
+  </label>
+</div>
+
+<div class="stage" id="ng-stage">
+  <div>
+    <div class="big-number" id="ng-number">?</div>
+    <div class="faint" id="ng-remaining" style="margin-top:0.5rem;"></div>
+  </div>
+</div>
+
+<div class="btn-group">
+  <button class="btn btn-big btn-primary" id="ng-generate" type="button">🎯 Generate</button>
+  <button class="btn" id="ng-reset" type="button">↺ Reset Bag</button>
+</div>
+
+<p class="hint"><kbd>Space</kbd> generate</p>

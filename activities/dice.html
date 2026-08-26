@@ -1,0 +1,84 @@
+---
+layout: activity
+title: Virtual Dice
+emoji: 🎲
+script: dice.js
+blurb: Roll 1-6 dice, choose d4 to d20, with an instant animated total.
+---
+<div class="controls-bar">
+  <label class="field">
+    Number of dice
+    <select id="dice-count">
+      <option value="1">1</option>
+      <option value="2" selected>2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+    </select>
+  </label>
+  <label class="field">
+    Die type
+    <select id="dice-sides">
+      <option value="4">d4</option>
+      <option value="6" selected>d6</option>
+      <option value="8">d8</option>
+      <option value="10">d10</option>
+      <option value="12">d12</option>
+      <option value="20">d20</option>
+    </select>
+  </label>
+</div>
+
+<div class="stage" id="dice-stage">
+  <div>
+    <div class="dice-row" id="dice-row"></div>
+    <div class="big-number" id="dice-total" style="margin-top:1rem;"></div>
+  </div>
+</div>
+
+<div class="btn-group">
+  <button class="btn btn-big btn-primary" id="dice-roll" type="button">🎲 Roll</button>
+</div>
+
+<p class="hint"><kbd>Space</kbd> roll</p>
+
+<style>
+.dice-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  justify-content: center;
+}
+.die {
+  width: 110px;
+  height: 110px;
+  border-radius: 20px;
+  background: var(--panel-2);
+  border: 3px solid var(--accent-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.15s ease;
+}
+.die.rolling { animation: die-shake 0.12s infinite; }
+@keyframes die-shake {
+  0% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } 100% { transform: rotate(-4deg); }
+}
+.die-number {
+  font-size: 2.6rem;
+  font-weight: 800;
+}
+.die-pips {
+  position: absolute;
+  inset: 14px;
+}
+.pip {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+</style>

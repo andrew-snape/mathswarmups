@@ -1,0 +1,48 @@
+---
+layout: activity
+title: Subitising
+emoji: ⚡
+script: subitising.js
+blurb: Flash a dot pattern for a split second and ask how many the class saw.
+---
+<div class="controls-bar">
+  <label class="field">
+    Max dots
+    <select id="sb-max">
+      <option value="5">Up to 5</option>
+      <option value="6" selected>Up to 6</option>
+      <option value="10">Up to 10</option>
+      <option value="20">Up to 20</option>
+    </select>
+  </label>
+  <label class="field">
+    Arrangement
+    <select id="sb-arrangement">
+      <option value="random">Random Scatter</option>
+      <option value="dice" selected>Dice / Domino Pattern</option>
+      <option value="ten-frame">Ten Frame</option>
+    </select>
+  </label>
+  <label class="field">
+    Flash time
+    <select id="sb-duration">
+      <option value="500">0.5s</option>
+      <option value="1000" selected>1s</option>
+      <option value="1500">1.5s</option>
+      <option value="2000">2s</option>
+      <option value="0">Stay on screen</option>
+    </select>
+  </label>
+</div>
+
+<div class="stage blank" id="sb-stage" style="flex-direction:column; gap:1rem;">
+  <svg id="sb-svg" viewBox="0 0 600 400" width="100%" height="100%" style="max-height:55vh"></svg>
+  <div class="big-number" id="sb-count" style="display:none;"></div>
+</div>
+
+<div class="btn-group">
+  <button class="btn btn-big btn-primary" id="sb-flash" type="button">⚡ Flash!</button>
+  <button class="btn btn-big" id="sb-reveal" type="button">👁 Reveal</button>
+</div>
+
+<p class="hint"><kbd>Space</kbd> flash &nbsp;·&nbsp; <kbd>R</kbd> reveal / hide</p>

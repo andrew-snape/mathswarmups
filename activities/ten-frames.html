@@ -1,0 +1,33 @@
+---
+layout: activity
+title: Ten Frames
+emoji: 🔟
+script: ten-frames.js
+blurb: Show a number on one or two ten-frames for subitising and place value.
+---
+<div class="controls-bar">
+  <label class="field">
+    Range
+    <select id="tf-range">
+      <option value="10" selected>Up to 10 (one frame)</option>
+      <option value="20">Up to 20 (two frames)</option>
+    </select>
+  </label>
+  <label class="checkbox-field">
+    <input type="checkbox" id="tf-hide-label"> Hide number label until reveal
+  </label>
+</div>
+
+<div class="stage" id="tf-stage">
+  <div>
+    <svg id="tf-svg" viewBox="0 0 620 260" width="100%" height="100%" style="max-height:55vh"></svg>
+    <div class="big-number" id="tf-number" style="margin-top:0.5rem;"></div>
+  </div>
+</div>
+
+<div class="btn-group">
+  <button class="btn btn-big btn-primary" id="tf-new" type="button">🔀 New Number</button>
+  <button class="btn btn-big" id="tf-reveal" type="button">👁 Show / Hide Number</button>
+</div>
+
+<p class="hint"><kbd>Space</kbd> new number &nbsp;·&nbsp; <kbd>R</kbd> show/hide number</p>
