@@ -32,9 +32,9 @@
     return c;
   }
 
-  function render(n, max) {
+  function render(n) {
     while (svg.firstChild) svg.removeChild(svg.firstChild);
-    const frames = max > 10 ? 2 : 1;
+    const frames = n > 10 ? 2 : 1;
     const cols = 5, rows = 2;
     const cell = 96, gap = 8;
     const frameW = cols * cell + (cols - 1) * gap;
@@ -73,7 +73,7 @@
     const max = parseInt(rangeSelect.value, 10);
     currentNumber = randInt(0, max);
     labelVisible = !hideLabelCheckbox.checked;
-    render(currentNumber, max);
+    render(currentNumber);
     updateLabel();
   }
 
