@@ -177,9 +177,10 @@ footer.site-footer {
 
 /* ---------- Activity page shell ---------- */
 .activity-page {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .top-bar {

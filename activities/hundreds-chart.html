@@ -7,7 +7,7 @@ blurb: Click to highlight patterns, reveal skip-counting multiples, or hide the 
 strand: "Number, Algebra"
 years: "F–6"
 ---
-<div class="controls-bar">
+<div class="controls-bar hc-controls">
   <label class="field">
     Range
     <select id="hc-range">
@@ -19,9 +19,6 @@ years: "F–6"
     <input type="checkbox" id="hc-hide-numbers"> Hide numbers
   </label>
   <button class="btn" id="hc-clear" type="button">↺ Clear</button>
-</div>
-
-<div class="controls-bar">
   <span class="hint" style="margin:0;">Skip count:</span>
   <div class="btn-group" id="hc-skip-buttons"></div>
 </div>
@@ -33,23 +30,35 @@ years: "F–6"
 <p class="hint">Click any cell to highlight it, or pick a skip-count to reveal its pattern.</p>
 
 <style>
+[data-page="hundreds-chart"] .activity-main {
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.hc-controls {
+  padding: 0.5rem var(--space-3);
+  row-gap: 0.4rem;
+}
+#hc-stage {
+  padding: 0.75rem;
+}
 .hundred-grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  gap: 0.4rem;
-  width: 100%;
-  max-width: 900px;
+  gap: 0.35rem;
+  width: 600px;
+  max-width: 100%;
+  aspect-ratio: 1;
   margin: 0 auto;
 }
 .hundred-cell {
-  aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--panel-2);
   border: 1px solid var(--border);
   border-radius: 8px;
-  font-size: clamp(0.7rem, 1.6vw, 1.15rem);
+  font-size: clamp(0.65rem, 2.2vmin, 1.15rem);
   font-weight: 700;
   color: var(--text);
   cursor: pointer;

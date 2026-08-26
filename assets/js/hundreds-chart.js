@@ -4,6 +4,37 @@
   const clearBtn = document.getElementById('hc-clear');
   const skipButtonsEl = document.getElementById('hc-skip-buttons');
   const grid = document.getElementById('hc-grid');
+  const stage = document.getElementById('hc-stage');
+
+  function sizeGrid() {
+    // Measure everything EXCEPT the stage, since the stage's own height
+    // depends on the grid size we're about to set — using stage.clientHeight
+    // here would be circular (it grows to fit whatever we just set).
+    const mainEl = document.querySelector('.activity-main');
+    const mainStyles = getComputedStyle(mainEl);
+    const paddingV = parseFloat(mainStyles.paddingTop) + parseFloat(mainStyles.paddingBottom);
+    const gap = parseFloat(mainStyles.rowGap) || 0;
+    const siblingsHeight = Array.from(mainEl.children)
+      .filter(c => c !== stage)
+      .reduce((sum, c) => sum + c.getBoundingClientRect().height, 0);
+    const gapsTotal = gap * (mainEl.children.length - 1);
+    const topBar = document.querySelector('.top-bar');
+    const badge = document.querySelector('.curriculum-badge');
+    const fixedHeight = (topBar ? topBar.getBoundingClientRect().height : 0) +
+      (badge ? badge.getBoundingClientRect().height : 0) +
+      paddingV + siblingsHeight + gapsTotal;
+
+    const stageStyles = getComputedStyle(stage);
+    const stagePaddingV = parseFloat(stageStyles.paddingTop) + parseFloat(stageStyles.paddingBottom);
+    const stagePaddingH = parseFloat(stageStyles.paddingLeft) + parseFloat(stageStyles.paddingRight);
+    const stageBorderV = parseFloat(stageStyles.borderTopWidth) + parseFloat(stageStyles.borderBottomWidth);
+
+    const remainingForStage = window.innerHeight - fixedHeight;
+    const availableHeight = remainingForStage - stagePaddingV - stageBorderV - 24;
+    const availableWidth = stage.clientWidth - stagePaddingH;
+    const size = Math.max(240, Math.min(availableWidth, availableHeight));
+    grid.style.width = `${size}px`;
+  }
 
   function buildGrid() {
     const start = parseInt(rangeSelect.value, 10);
@@ -52,6 +83,13 @@
     });
   });
 
+  window.addEventListener('resize', sizeGrid);
+  if (window.ResizeObserver) {
+    new ResizeObserver(sizeGrid).observe(stage);
+  }
+  document.addEventListener('fullscreenchange', () => setTimeout(sizeGrid, 50));
+
   buildSkipButtons();
   buildGrid();
+  sizeGrid();
 })();
