@@ -18,8 +18,9 @@ automatically to GitHub Pages via GitHub Actions.
 - **Ten Frames** — shows a number on one or two ten-frames up to 20.
 - **Number Generator** — random number picker with a custom range, including
   a "no repeats until the bag is empty" mode for fair student picks.
-- **Esti-Mystery** — reveals number clues (range, parity, factors, digit sum)
-  one at a time so students narrow down a hidden mystery number.
+- **Hundreds Chart** — click to highlight patterns, reveal skip-counting
+  multiples, or hide the numbers for before/after games, across 1–100 or
+  101–200.
 - **Would You Rather Maths** — two scenarios (value for money, time & speed,
   chance, area & volume), no single right answer, chosen and justified with
   maths.
@@ -40,7 +41,7 @@ if you need one for programming/reporting.
 | Activity | Strand(s) | Years |
 |---|---|---|
 | Number Talks | Number | 3–6 |
-| Esti-Mystery | Number (estimation & reasoning) | 2–6 |
+| Hundreds Chart | Number, Algebra (patterns) | F–6 |
 | Would You Rather Maths | Number, Measurement, Probability (reasoning) | 3–6 |
 | Subitising | Number | F–4 |
 | Which One Doesn't Belong? | Number, Space (reasoning) | F–6 |

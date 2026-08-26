@@ -1,0 +1,73 @@
+---
+layout: activity
+title: Hundreds Chart
+emoji: 🔢
+script: hundreds-chart.js
+blurb: Click to highlight patterns, reveal skip-counting multiples, or hide the numbers.
+strand: "Number, Algebra"
+years: "F–6"
+---
+<div class="controls-bar">
+  <label class="field">
+    Range
+    <select id="hc-range">
+      <option value="1" selected>1–100</option>
+      <option value="101">101–200</option>
+    </select>
+  </label>
+  <label class="checkbox-field">
+    <input type="checkbox" id="hc-hide-numbers"> Hide numbers
+  </label>
+  <button class="btn" id="hc-clear" type="button">↺ Clear</button>
+</div>
+
+<div class="controls-bar">
+  <span class="hint" style="margin:0;">Skip count:</span>
+  <div class="btn-group" id="hc-skip-buttons"></div>
+</div>
+
+<div class="stage" id="hc-stage">
+  <div class="hundred-grid" id="hc-grid"></div>
+</div>
+
+<p class="hint">Click any cell to highlight it, or pick a skip-count to reveal its pattern.</p>
+
+<style>
+.hundred-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 0.4rem;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.hundred-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: clamp(0.7rem, 1.6vw, 1.15rem);
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.1s ease, transform 0.1s ease;
+  user-select: none;
+}
+.hundred-cell:hover {
+  border-color: var(--accent-2);
+}
+.hundred-cell:active {
+  transform: scale(0.93);
+}
+.hundred-cell.highlight {
+  background: var(--accent);
+  color: #1a1400;
+  border-color: var(--accent);
+}
+.hundred-cell.hidden-number {
+  color: transparent;
+}
+</style>
