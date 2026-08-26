@@ -160,8 +160,8 @@
   }
 
   function reveal() {
+    clearTimeout(hideTimer);
     if (stage.classList.contains('blank') || svg.style.display === 'none') {
-      clearTimeout(hideTimer);
       render(currentCount);
       showStage();
       countEl.textContent = currentCount;
