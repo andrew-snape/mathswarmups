@@ -1,0 +1,14 @@
+---
+layout: default
+---
+<div class="activity-page" data-page="{{ page.script | remove: '.js' }}">
+  <header class="top-bar">
+    <a class="home-link" href="{{ '/' | relative_url }}">← Home</a>
+    <h1 class="page-title">{{ page.emoji }} {{ page.title }}</h1>
+    <button class="btn btn-ghost" id="fullscreen-toggle" type="button">⛶ Fullscreen</button>
+  </header>
+  <main class="activity-main">
+    {{ content }}
+  </main>
+</div>
+{% if page.script %}<script src="{{ '/assets/js/' | append: page.script | relative_url }}"></script>{% endif %}

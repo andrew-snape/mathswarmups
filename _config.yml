@@ -1,0 +1,18 @@
+title: Maths Warm-Ups
+description: >-
+  Quick, TV-ready maths warm-up activities for the classroom — number talks,
+  subitising, which one doesn't belong, dice and number games.
+baseurl: "/mathswarmups"
+url: "https://andrew-snape.github.io"
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+plugins: []
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - node_modules
