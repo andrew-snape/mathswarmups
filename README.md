@@ -24,6 +24,9 @@ the bottom of each page) so it's easy to drive from the front of the room.
 
 ## Local development
 
+Requires Ruby 3.1+ (Jekyll won't install on older Rubies, e.g. macOS's
+system Ruby 2.6 — install a newer one via Homebrew or rbenv/rvm if needed).
+
 ```bash
 bundle install
 bundle exec jekyll serve
@@ -33,9 +36,9 @@ Then open http://localhost:4000/mathswarmups/.
 
 ## Deployment
 
-Pushing to `main` triggers `.github/workflows/pages.yml`, which builds the
-Jekyll site and publishes it to GitHub Pages. In the repo settings, under
-**Pages**, set the source to **GitHub Actions** (one-time setup).
+Pushing to `main` triggers `.github/workflows/jekyll.yml`, which builds the
+Jekyll site and publishes it to GitHub Pages. Pages is already configured to
+deploy from GitHub Actions (Settings → Pages → Source).
 
 ## Adding more activities
 
