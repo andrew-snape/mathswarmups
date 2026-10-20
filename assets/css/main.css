@@ -1,21 +1,82 @@
-/* ---------- Design tokens ---------- */
+/* ---------- Design tokens ----------
+   Semantic colour roles, modelled on Apple's HIG colour guidance:
+   the dark palette is the default (it suits a projected classroom TV),
+   and a light palette is used when the system asks for light appearance. */
 :root {
+  color-scheme: dark light;
+
+  /* Surfaces */
   --bg: #0b1020;
+  --bg-top: #171f38;
   --panel: #131a2e;
   --panel-2: #1b2440;
   --border: #2a3352;
+  --shadow: 0 10px 30px rgba(0,0,0,0.35);
+
+  /* Text: body text and dimmed/secondary text (both >= 4.5:1 on panels) */
   --text: #f4f6fb;
   --text-dim: #a7b0cc;
-  --accent: #ffcc33;
+
+  /* Accents */
+  --accent: #ffcc33;      /* accent as text/icon ink on dark surfaces */
+  --accent-fill: #ffcc33; /* accent as a filled background (dark text sits on it) */
   --accent-2: #4fd1c5;
   --accent-3: #ff6b6b;
   --accent-4: #7c9bff;
+  --link: #4fd1c5;
+  --focus: #4fd1c5;
+  --on-primary: #04101f;
+
+  /* Shape: one radius scale, used consistently */
+  --radius-sm: 12px;
   --radius: 18px;
-  --shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --radius-pill: 999px;
+
+  /* Spacing */
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 1.75rem;
   --space-4: 3rem;
+  --gutter: var(--space-3);
+
+  /* Touch target minimum (Apple HIG: 44 x 44 pt) */
+  --hit: 44px;
+
+  /* Type scale (rem-based, roughly HIG text styles) */
+  --fs-caption: 0.8rem;
+  --fs-footnote: 0.9rem;
+  --fs-body: 1rem;
+  --fs-headline: 1.25rem;
+  --fs-title: 1.5rem;
+  --fs-large-title: clamp(2.2rem, 5vw, 3.5rem);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #eef2f8;
+    --bg-top: #ffffff;
+    --panel: #ffffff;
+    --panel-2: #e9eef7;
+    --border: #c5cee0;
+    --shadow: 0 10px 30px rgba(20,30,60,0.12);
+    --text: #111827;
+    --text-dim: #4a5468;
+    --accent: #8a5a00;
+    --accent-fill: #ffcc33;
+    --accent-2: #0b6b63;
+    --accent-3: #b42318;
+    --accent-4: #2f4fd1;
+    --link: #0b6b63;
+    --focus: #0b6b63;
+    --on-primary: #ffffff;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -26,38 +87,66 @@ html, body {
 
 body {
   margin: 0;
-  background: radial-gradient(circle at top, #171f38 0%, var(--bg) 60%);
+  background: radial-gradient(circle at top, var(--bg-top) 0%, var(--bg) 60%);
+  background-color: var(--bg);
   color: var(--text);
-  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: clamp(16px, 1.3vw, 22px);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: clamp(17px, 1.3vw, 22px);
+  line-height: 1.45;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
-h1, h2, h3 { margin: 0; }
+h1, h2, h3 { margin: 0; line-height: 1.2; letter-spacing: -0.01em; }
 
-a { color: var(--accent-2); }
+a { color: var(--link); }
+
+/* Visible keyboard focus everywhere (WCAG 2.4.7) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
 
 /* ---------- Buttons & controls ---------- */
 .btn {
   font: inherit;
   font-weight: 700;
+  min-height: var(--hit);
+  min-width: var(--hit);
   color: var(--text);
   background: var(--panel-2);
   border: 2px solid var(--border);
-  border-radius: 999px;
-  padding: 0.7em 1.4em;
+  border-radius: var(--radius-pill);
+  padding: 0.6em 1.4em;
   cursor: pointer;
-  transition: transform 0.08s ease, background 0.15s ease, border-color 0.15s ease;
+  touch-action: manipulation;
+  transition: transform 0.08s var(--ease-out), background 0.15s ease, border-color 0.15s ease;
   -webkit-tap-highlight-color: transparent;
 }
-.btn:hover { border-color: var(--accent-2); }
+@media (hover: hover) {
+  .btn:hover { border-color: var(--focus); }
+}
 .btn:active { transform: scale(0.96); }
-.btn:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; }
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 
 .btn-primary {
   background: linear-gradient(135deg, var(--accent-4), var(--accent-2));
   border-color: transparent;
-  color: #04101f;
+  color: var(--on-primary);
   font-size: 1.15em;
   padding: 0.75em 1.8em;
 }
@@ -70,7 +159,7 @@ a { color: var(--accent-2); }
 
 .btn-ghost {
   background: transparent;
-  opacity: 0.75;
+  opacity: 0.8;
 }
 .btn-ghost:hover { opacity: 1; }
 
@@ -84,10 +173,12 @@ a { color: var(--accent-2); }
 
 select, input[type="number"], input[type="range"] {
   font: inherit;
+  font-size: max(16px, 1em); /* 16px+ stops iOS zooming the page on focus */
+  min-height: var(--hit);
   color: var(--text);
   background: var(--panel-2);
   border: 2px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   padding: 0.5em 0.8em;
 }
 
@@ -95,7 +186,7 @@ label.field {
   display: flex;
   flex-direction: column;
   gap: 0.3em;
-  font-size: 0.85em;
+  font-size: var(--fs-footnote);
   color: var(--text-dim);
   font-weight: 600;
 }
@@ -103,23 +194,30 @@ label.field {
 .checkbox-field {
   display: flex;
   align-items: center;
-  gap: 0.5em;
-  font-size: 0.85em;
+  gap: 0.6em;
+  min-height: var(--hit);
+  font-size: var(--fs-footnote);
   color: var(--text-dim);
   font-weight: 600;
+  cursor: pointer;
 }
-.checkbox-field input { width: 1.3em; height: 1.3em; }
+.checkbox-field input {
+  width: 1.4em;
+  height: 1.4em;
+  accent-color: var(--accent-2);
+}
 
 /* ---------- Home page ---------- */
 .home {
   max-width: 1100px;
   margin: 0 auto;
-  padding: var(--space-4) var(--space-3) var(--space-4);
+  padding: calc(var(--space-4) + env(safe-area-inset-top)) max(var(--gutter), env(safe-area-inset-right)) var(--space-4) max(var(--gutter), env(safe-area-inset-left));
   text-align: center;
 }
 
 .home-title {
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-size: var(--fs-large-title);
+  font-weight: 800;
   letter-spacing: -0.02em;
 }
 
@@ -127,7 +225,7 @@ label.field {
   color: var(--text-dim);
   max-width: 46em;
   margin: var(--space-2) auto var(--space-4);
-  font-size: 1.1em;
+  font-size: 1.05em;
 }
 
 .category-grid {
@@ -146,41 +244,47 @@ label.field {
   text-decoration: none;
   color: var(--text);
   box-shadow: var(--shadow);
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  transition: transform 0.15s var(--ease-out), border-color 0.15s ease;
 }
-.card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent-2);
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--focus);
+  }
 }
+.card:active { transform: scale(0.98); }
 .card .emoji {
   font-size: 2.6rem;
   display: block;
   margin-bottom: 0.4em;
 }
 .card h2 {
-  font-size: 1.35rem;
+  font-size: var(--fs-headline);
+  font-weight: 700;
   margin-bottom: 0.3em;
 }
 .card p {
   color: var(--text-dim);
   margin: 0;
-  font-size: 0.95em;
-  line-height: 1.4;
+  font-size: var(--fs-footnote);
+  line-height: 1.45;
 }
 
 footer.site-footer {
   color: var(--text-dim);
   text-align: center;
-  padding: var(--space-3);
-  font-size: 0.85em;
+  padding: var(--space-3) var(--gutter) calc(var(--space-3) + env(safe-area-inset-bottom));
+  font-size: var(--fs-footnote);
 }
 
 /* ---------- Activity page shell ---------- */
 .activity-page {
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  /* Safe-area insets so nothing sits under the notch, home indicator or rounded corners */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 .top-bar {
@@ -188,30 +292,41 @@ footer.site-footer {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-2) var(--gutter);
   border-bottom: 1px solid var(--border);
 }
 
 .top-bar .page-title {
-  font-size: 1.3rem;
+  font-size: var(--fs-headline);
+  font-weight: 700;
   text-align: center;
   flex: 1;
 }
 
+.top-bar .btn {
+  font-size: var(--fs-footnote);
+  padding: 0.5em 1em;
+}
+
 .home-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--hit);
+  padding: 0 0.5em;
+  margin: 0 -0.5em;
   color: var(--text-dim);
   text-decoration: none;
   font-weight: 700;
   white-space: nowrap;
 }
-.home-link:hover { color: var(--accent-2); }
+.home-link:hover { color: var(--link); }
 
 .activity-main {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--space-3);
+  padding: var(--gutter);
   gap: var(--space-3);
   width: 100%;
 }
@@ -234,7 +349,8 @@ footer.site-footer {
   flex: 1;
   width: 100%;
   max-width: 1200px;
-  min-height: 48vh;
+  min-height: min(40vh, 420px);
+  min-height: min(40dvh, 420px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -247,15 +363,25 @@ footer.site-footer {
   text-align: center;
 }
 
+/* The blank stage is always dark (it is a projected "flash" screen),
+   so it carries its own dark colour tokens even in light appearance. */
 .stage.blank {
   background: #05070f;
+  --panel: #05070f;
+  --panel-2: #131a2e;
+  --border: #2a3352;
+  --text: #f4f6fb;
+  --text-dim: #a7b0cc;
+  color: var(--text);
 }
 
 .big-number {
-  font-size: clamp(3rem, 12vw, 9rem);
+  font-size: clamp(3rem, min(12vw, 16vh), 9rem);
+  font-size: clamp(3rem, min(12vw, 16dvh), 9rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 
 .big-text {
@@ -266,17 +392,22 @@ footer.site-footer {
 
 .faint {
   color: var(--text-dim);
-  font-size: 0.6em;
+  font-size: 0.9em;
   font-weight: 600;
+}
+
+.stage svg {
+  max-height: 40vh;
+  max-height: 40dvh;
 }
 
 .badge {
   display: inline-block;
   background: var(--panel-2);
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   padding: 0.3em 1em;
-  font-size: 0.8em;
+  font-size: var(--fs-caption);
   color: var(--text-dim);
   font-weight: 700;
   text-transform: uppercase;
@@ -306,7 +437,7 @@ footer.site-footer {
 
 .curriculum-badge {
   text-align: center;
-  font-size: 0.75rem;
+  font-size: var(--fs-caption);
   font-weight: 700;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -324,7 +455,7 @@ footer.site-footer {
   color: var(--text-dim);
   background: var(--panel-2);
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   padding: 0.25em 0.8em;
   margin-top: 0.7em;
 }
@@ -332,19 +463,21 @@ footer.site-footer {
 kbd {
   background: var(--panel-2);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   padding: 0.1em 0.5em;
   font-family: inherit;
   font-size: 0.9em;
 }
 
-/* fullscreen tweaks: hide chrome, let stage breathe */
+/* fullscreen tweaks: hide chrome, let stage breathe (still readable when shown) */
 .activity-page:fullscreen .top-bar,
 .activity-page:-webkit-full-screen .top-bar {
-  opacity: 0.35;
+  opacity: 0.6;
 }
 .activity-page:fullscreen .top-bar:hover,
-.activity-page:-webkit-full-screen .top-bar:hover {
+.activity-page:-webkit-full-screen .top-bar:hover,
+.activity-page:fullscreen .top-bar:focus-within,
+.activity-page:-webkit-full-screen .top-bar:focus-within {
   opacity: 1;
 }
 .activity-page:fullscreen,
@@ -352,7 +485,45 @@ kbd {
   background: var(--bg);
 }
 
+/* No hover on touch screens, so keep the fullscreen top bar legible */
+@media (hover: none) {
+  .activity-page:fullscreen .top-bar,
+  .activity-page:-webkit-full-screen .top-bar { opacity: 0.8; }
+}
+
+/* Use the full screen when projecting */
+.activity-page:fullscreen .stage,
+.activity-page:-webkit-full-screen .stage { max-width: none; }
+
+/* Short screens (laptops, iPad landscape with Safari chrome): tighten the chrome */
+@media (max-height: 820px) {
+  .top-bar { padding: 0.5rem var(--gutter); }
+  .curriculum-badge { padding: 0.1em; }
+  .activity-main { gap: 0.75rem; padding: 0.75rem var(--gutter); }
+  .controls-bar { padding: 0.5rem var(--space-3); gap: 0.75rem; }
+  .stage { padding: 0.5rem; }
+}
+
+/* Phones: narrower 16 pt gutters, as the HIG suggests for compact width */
 @media (max-width: 640px) {
+  :root { --gutter: var(--space-2); }
   .top-bar { flex-wrap: wrap; }
   .top-bar .page-title { order: -1; flex-basis: 100%; }
+  .stage { padding: var(--space-2); }
+  .controls-bar { padding: var(--space-2); gap: var(--space-2); }
+}
+
+/* Reduced motion: keep state changes, drop the animation and movement */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .card:hover,
+  .card:active,
+  .btn:active {
+    transform: none;
+  }
 }

@@ -36,10 +36,11 @@
     while (svg.firstChild) svg.removeChild(svg.firstChild);
     const frames = n > 10 ? 2 : 1;
     const cols = 5, rows = 2;
-    const cell = 96, gap = 8;
+    // Two frames must fit the 620-wide viewBox, so shrink the cells for 11-20.
+    const cell = frames === 2 ? 50 : 96, gap = frames === 2 ? 5 : 8;
     const frameW = cols * cell + (cols - 1) * gap;
     const frameH = rows * cell + (rows - 1) * gap;
-    const frameGap = 30;
+    const frameGap = frames === 2 ? 20 : 30;
     const totalWidth = frames * frameW + (frames - 1) * frameGap;
     let startX = (620 - totalWidth) / 2;
     const startY = (260 - frameH) / 2;

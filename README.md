@@ -40,7 +40,7 @@ if you need one for programming/reporting.
 
 | Activity | Strand(s) | Years |
 |---|---|---|
-| Number Talks | Number | 3–6 |
+| Number Talks | Number | 1–6 |
 | Hundreds Chart | Number, Algebra (patterns) | F–6 |
 | Would You Rather Maths | Number, Measurement, Probability (reasoning) | 3–6 |
 | Subitising | Number | F–4 |

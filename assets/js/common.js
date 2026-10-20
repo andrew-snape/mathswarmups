@@ -11,10 +11,19 @@ function toggleFullscreen(el) {
 
 document.addEventListener('DOMContentLoaded', () => {
   const btn = document.getElementById('fullscreen-toggle');
-  if (btn) {
-    const page = document.querySelector('.activity-page') || document.documentElement;
-    btn.addEventListener('click', () => toggleFullscreen(page));
+  if (!btn) return;
+  if (!(document.fullscreenEnabled || document.webkitFullscreenEnabled)) {
+    btn.hidden = true; // e.g. iPhone Safari has no fullscreen for pages
+    return;
   }
+  const page = document.querySelector('.activity-page') || document.documentElement;
+  const sync = () => {
+    const on = document.fullscreenElement || document.webkitFullscreenElement;
+    btn.textContent = on ? '⛶ Exit fullscreen' : '⛶ Fullscreen';
+  };
+  btn.addEventListener('click', () => toggleFullscreen(page));
+  document.addEventListener('fullscreenchange', sync);
+  document.addEventListener('webkitfullscreenchange', sync);
 });
 
 // Small utility: random integer in [min, max] inclusive.

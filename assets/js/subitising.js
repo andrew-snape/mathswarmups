@@ -102,10 +102,11 @@
   function drawTenFrame(n) {
     const frames = n > 10 ? 2 : 1;
     const cols = 5, rows = 2;
-    const cell = 64, gap = 6;
+    // Two frames must fit the 600-wide viewBox, so shrink the cells for 11-20.
+    const cell = frames === 2 ? 48 : 64, gap = frames === 2 ? 5 : 6;
     const frameW = cols * cell + (cols - 1) * gap;
     const frameH = rows * cell + (rows - 1) * gap;
-    const frameGap = 40;
+    const frameGap = frames === 2 ? 24 : 40;
     const totalWidth = frames * frameW + (frames - 1) * frameGap;
     let startX = (VB_W - totalWidth) / 2;
     const startY = (VB_H - frameH) / 2;
@@ -160,6 +161,7 @@
   }
 
   function reveal() {
+    if (!currentCount) return; // nothing flashed yet
     clearTimeout(hideTimer);
     if (stage.classList.contains('blank') || svg.style.display === 'none') {
       render(currentCount);
